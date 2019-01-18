@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Dashboard from './components/Dashboard';
+import Nav from './components/Nav';
+import NotFound from './components/NotFound';
+import SearchView from './components/SearchView';
 
 class App extends Component {
   render() {
     return (
       <Router>
         <div>
-          <Dashboard />
+          <Nav />
+
+          <Switch>            
+            {/* <Route path='/?query=&sort=:by&prefix&page=:pageNumber&dateRange=:searchFor&type=:search' component={SearchView} /> */}
+            <Route exact path='/' component={SearchView} />            
+            <Route component={NotFound} />
+          </Switch>
         </div>
-      </Router>      
+      </Router>
     );
   }
 }

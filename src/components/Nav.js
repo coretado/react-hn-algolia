@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { querySelector } from '../utility/querySelector';
+import { withRouter } from 'react-router-dom';
 
 import Search from './Search';
 import QueryOptions from './QueryOptions';
 
-class Dashboard extends Component {
+class Nav extends Component {
   state = {
     type: {
       value: 'Stories',
@@ -25,6 +26,24 @@ class Dashboard extends Component {
       definition: 'for'
     },
     searchString: ''
+  }
+
+  componentDidMount() {
+    const { type, sort, dateRange } = this.state; 
+    const { history } = this.props;
+
+    history.push(`/?/query=&sort=${sort.queryValue}&prefix&page=0&dateRange=${dateRange.queryValue}&type=${type.queryValue}`);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { type, sort, dateRange } = this.state; 
+    const { history } = this.props;
+
+    if (prevState.type.value !== type.value 
+        || prevState.sort.value !== sort.value 
+        || prevState.dateRange.value !== dateRange.value) {
+          history.push(`/?/query=&sort=${sort.queryValue}&prefix&page=0&dateRange=${dateRange.queryValue}&type=${type.queryValue}`);
+        }
   }
 
   handleInput = (e) => {
@@ -71,4 +90,4 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default withRouter(Nav);
