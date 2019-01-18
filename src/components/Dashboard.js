@@ -55,16 +55,16 @@ class Dashboard extends Component {
           searchString={this.state.searchString} 
           handleInput={this.handleInput} 
           handleSubmit={this.handleSubmit} />
-        <div className='container row spacer'>
-          {Object.keys(this.state).filter(item => item !== 'searchString').map(item => (
-            <QueryOptions 
-              key={item} 
-              options={this.state[item].options} 
-              queryId={item} 
-              definition={this.state[item].definition} 
-              handleQuery={this.handleQuery} 
-              selected={this.state[item].value} />
-          ))}
+        <div className='container row spacer'>          
+            {Object.keys(this.state).filter(item => item !== 'searchString').map(item => (
+              <QueryOptions 
+                key={item} 
+                options={this.state[item].options} 
+                queryId={item} 
+                definition={this.state[item].definition} 
+                handleQuery={this.handleQuery} 
+                selected={this.state[item].value} />
+            ))}        
         </div>        
       </Fragment>      
     );

@@ -63,6 +63,10 @@ body {
   margin: 2vw auto;
 }
 
+.queryOptions {
+  position: absolute;
+}
+
 .queryOptions-button {
   display: flex;
   align-items: center;
@@ -92,9 +96,8 @@ body {
 }
 
 .queryOptions-menu {
-  display: flex;
-  flex-direction: column;
-  z-index: 10;
+  position: absolute;
+  top: 3rem;
 }
 
 .queryOptions-menu > li {

@@ -22,7 +22,7 @@ class QueryOptions extends Component {
   render() {
     return (
       <Fragment>
-        <span className='queryOptions-definition'>{this.props.definition}</span>
+        {/* <span className='queryOptions-definition'>{this.props.definition}</span> */}
         <div className='column'>
           <button onClick={this.showMenu} className='queryOptions-button'>
             <span className='queryOptions-button--text'>{this.props.selected}</span>
