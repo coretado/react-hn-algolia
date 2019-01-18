@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className='container'>
+        <div>
           <Dashboard />
         </div>
       </Router>      
