@@ -184,6 +184,23 @@ body {
   margin: 0 1vw;
 }
 
-/* .post-card > div > span:not(:last-child) {
-  margin-right: 1vw;
-} */
+/* pagination */
+.pagination-spacing {
+  margin: 1vw auto;
+}
+
+.pagination-button {
+  outline: none;
+  border: none;
+  
+  text-decoration: underline;
+  font-size: 1.6rem;
+  padding: 0.5rem;
+  background-color: transparent;
+  cursor: pointer;
+  margin-right: 1.5vw;
+}
+
+.pagination-button:hover:enabled {
+  font-weight: bold;
+}

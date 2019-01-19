@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
 import Loading from './Loading';
+import PageScroll from './PageScroll';
 import Post from './Post';
 
 class SearchView extends Component {
@@ -19,7 +20,7 @@ class SearchView extends Component {
 
     if (Object.keys(terms).length > 0) {
       axios.get(`https://cors-anywhere.herokuapp.com/hn.algolia.com/api/v1/${terms.sort}?query=${terms.query}&tags=${terms.type}&numericFilters=&page=${terms.page}`)
-      .then((response) => this.setState(() => ({posts: response})))
+      .then((response) => this.setState((prevState) => ({...prevState, posts: response, loading: false})))
       .catch((error) => {
         alert(error);
         this.setState(() => ({error: true}));
@@ -37,8 +38,7 @@ class SearchView extends Component {
     const terms = queryString.parse(search);   
 
     axios.get(`https://cors-anywhere.herokuapp.com/hn.algolia.com/api/v1/${terms.sort}?query=${terms.query}&tags=${terms.type}&numericFilters=&page=${terms.page}`)
-    .then((response) => this.setState(() => ({posts: response})))
-    .then(() => this.setState(() => ({loading: false})))
+    .then((response) => this.setState((prevState) => ({...prevState, posts: response, loading: false})))    
     .catch((error) => {
       alert(error);
       this.setState(() => ({error: true}));
@@ -57,7 +57,7 @@ class SearchView extends Component {
     return (
       <div className='container'>
         <span className='post-search-info'>
-          {posts.data.hitsPerPage} items per {posts.data.nbPages} pages (total: {posts.data.nbHits})
+          {posts.data.hitsPerPage} items / {posts.data.nbPages} pages (total: {posts.data.nbHits})
         </span>
         <div className='column'>
           {posts.data.hits.map(hit => (
@@ -65,7 +65,8 @@ class SearchView extends Component {
               key={hit.objectID} 
               post={hit} />
           ))}
-        </div>        
+        </div>
+        <PageScroll />
       </div>
     );
   } 
