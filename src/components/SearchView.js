@@ -9,7 +9,8 @@ import Post from './Post';
 class SearchView extends Component {
   state = {
     posts: null,
-    error: false
+    error: false, 
+    loading: true
   }
 
   componentDidMount() {  
@@ -31,10 +32,13 @@ class SearchView extends Component {
 
     if (prevProps.location.search === search) return;
 
+    this.setState(() => ({loading: true}));
+
     const terms = queryString.parse(search);   
 
     axios.get(`https://cors-anywhere.herokuapp.com/hn.algolia.com/api/v1/${terms.sort}?query=${terms.query}&tags=${terms.type}&numericFilters=&page=${terms.page}`)
     .then((response) => this.setState(() => ({posts: response})))
+    .then(() => this.setState(() => ({loading: false})))
     .catch((error) => {
       alert(error);
       this.setState(() => ({error: true}));
@@ -42,12 +46,11 @@ class SearchView extends Component {
   }
 
   render() {
-    const { search } = this.props.location;
-    const { posts, error } = this.state; 
+    const { posts, error, loading } = this.state; 
 
     if (error) return <Redirect to='/errorOccured' />;
 
-    if (!posts) {
+    if (loading) {
       return <Loading text='Loading' speed={300} />;    
     }
 
