@@ -3,9 +3,12 @@ import queryString from 'query-string';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
+import Loading from './Loading';
+import Post from './Post';
+
 class SearchView extends Component {
   state = {
-    data: null,
+    posts: null,
     error: false
   }
 
@@ -15,7 +18,7 @@ class SearchView extends Component {
 
     if (Object.keys(terms).length > 0) {
       axios.get(`https://cors-anywhere.herokuapp.com/hn.algolia.com/api/v1/${terms.sort}?query=${terms.query}&tags=${terms.type}&numericFilters=&page=${terms.page}`)
-      .then((response) => this.setState(() => ({data: response})))
+      .then((response) => this.setState(() => ({posts: response})))
       .catch((error) => {
         alert(error);
         this.setState(() => ({error: true}));
@@ -31,7 +34,7 @@ class SearchView extends Component {
     const terms = queryString.parse(search);   
 
     axios.get(`https://cors-anywhere.herokuapp.com/hn.algolia.com/api/v1/${terms.sort}?query=${terms.query}&tags=${terms.type}&numericFilters=&page=${terms.page}`)
-    .then((response) => this.setState(() => ({data: response})))
+    .then((response) => this.setState(() => ({posts: response})))
     .catch((error) => {
       alert(error);
       this.setState(() => ({error: true}));
@@ -40,18 +43,29 @@ class SearchView extends Component {
 
   render() {
     const { search } = this.props.location;
-    const { data, error } = this.state;
+    const { posts, error } = this.state; 
 
     if (error) return <Redirect to='/errorOccured' />;
 
-    if (!data) return <p>Loading...</p>;
+    if (!posts) {
+      return <Loading text='Loading' speed={300} />;    
+    }
 
     return (
-      <div>
-        {search}
+      <div className='container'>
+        <span className='post-search-info'>
+          {posts.data.hitsPerPage} items per {posts.data.nbPages} pages (total: {posts.data.nbHits})
+        </span>
+        <div className='column'>
+          {posts.data.hits.map(hit => (
+            <Post 
+              key={hit.objectID} 
+              post={hit} />
+          ))}
+        </div>        
       </div>
     );
-  }
+  } 
 }
 
 export default SearchView;

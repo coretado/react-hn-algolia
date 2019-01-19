@@ -30,15 +30,6 @@ body {
   font-family: 'Source Code Pro', monospace;
   font-size: 4rem;
   color: #2ED5EE;
-  /* width: fit-content;
-  background-image: -webkit-linear-gradient(to right, #03E3E9, #2516c7); 
-  background-image:    -moz-linear-gradient(to right, #03E3E9, #2516c7); 
-  background-image:     -ms-linear-gradient(to right, #03E3E9, #2516c7); 
-  background-image:      -o-linear-gradient(to right, #03E3E9, #2516c7); 
-  background-image:         linear-gradient(to right, #03E3E9, #2516c7);
-  color:transparent;
-  -webkit-background-clip: text;
-  background-clip: text; */
 }
 
 /* App Container and Layout */
@@ -100,6 +91,7 @@ body {
 .queryOptions-menu {
   position: absolute;
   top: 3rem;
+  z-index: 10;
 }
 
 .queryOptions-menu > li {
@@ -150,4 +142,29 @@ body {
 
 .search-specify {
   width: 75%;
+}
+
+/* Loader */
+.loading-text {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 3.5rem;
+  font-weight: bold;
+  
+  display: flex;
+  justify-content: center;
+}
+
+/* posts */
+.post-search-info {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.post-card {
+  border-top: 1px solid #f5f5f5;
+  border-bottom: 1px solid #f5f5f5;
+  background-color: #fff;
+  width: 100%;
+  display: block;
+  padding: 1vw;
 }
