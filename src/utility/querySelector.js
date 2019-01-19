@@ -1,25 +1,17 @@
 export const querySelector = (parameter) => {
   switch(parameter) {
-    case 'All':
-      return 'all';
-    case 'Stories': 
+    case 'new':
       return 'story';
-    case 'Comments':
+    case 'comments': 
       return 'comment';
-    case 'Popularity':
-      return 'byPopularity';
-    case 'Date':
-      return 'byDate';
-    case 'All time':
-      return 'all';
-    case 'Last 24h':
-      return 'last24h';
-    case 'Past Week':
-      return 'pastWeek';
-    case 'Past Month':
-      return 'pastMonth';
-    case 'Past Year':
-      return 'pastYear';
+    case 'ask':
+      return 'ask_hn';
+    case 'show':
+      return 'show_hn';
+    case 'popularity':
+      return 'search';
+    case 'date':
+      return 'search_by_date';
     default:
       return '';
   }

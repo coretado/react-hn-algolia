@@ -8,42 +8,34 @@ import QueryOptions from './QueryOptions';
 class Nav extends Component {
   state = {
     type: {
-      value: 'Stories',
-      queryValue: 'story',
-      options: ['All', 'Stories', 'Comments'],
-      definition: 'Search'
+      value: 'new',
+      options: ['new', 'comments', 'ask', 'show'],
+      definition: 'Search',
+      queryValue: 'story'
     },
     sort: {
-      value: 'Popularity',
-      queryValue: 'byPopularity',
-      options: ['Popularity', 'Date'],
+      value: 'popularity',
+      queryValue: 'search',
+      options: ['popularity', 'date'],
       definition: 'by'
-    }, 
-    dateRange: {
-      value: 'All time',
-      queryValue: 'all',
-      options: ['All time', 'Last 24h', 'Past Week', 'Past Month', 'Past Year'], 
-      definition: 'for'
     },
     searchString: ''
-  }
+  }  
 
   componentDidMount() {
-    const { type, sort, dateRange } = this.state; 
+    const { type, sort } = this.state; 
     const { history } = this.props;
 
-    history.push(`/?/query=&sort=${sort.queryValue}&prefix&page=0&dateRange=${dateRange.queryValue}&type=${type.queryValue}`);
+    history.push(`/?query=&type=${type.queryValue}&sort=${sort.queryValue}&page=0`);
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { type, sort, dateRange } = this.state; 
+    const { type, sort } = this.state; 
     const { history } = this.props;
 
-    if (prevState.type.value !== type.value 
-        || prevState.sort.value !== sort.value 
-        || prevState.dateRange.value !== dateRange.value) {
-          history.push(`/?/query=&sort=${sort.queryValue}&prefix&page=0&dateRange=${dateRange.queryValue}&type=${type.queryValue}`);
-        }
+    if (prevState.type.value !== type.value || prevState.sort.value !== sort.value ) {
+      history.push(`/?query=&type=${type.queryValue}&sort=${sort.queryValue}&page=0`);          
+    }    
   }
 
   handleInput = (e) => {
@@ -52,8 +44,11 @@ class Nav extends Component {
   }
 
   handleSubmit = (e) => {
+    const { history } = this.props;
+    const { searchString, type, sort } = this.state;
     e.preventDefault();
     this.setState((prevState) => ({...prevState, searchString: ''}));
+    history.push(`/?query=${searchString}&type=${type.queryValue}&sort=${sort.queryValue}&page=0`);
   }
 
   handleQuery = (option, queryId) => {
@@ -68,23 +63,25 @@ class Nav extends Component {
   }
 
   render() {
+    const { searchString } = this.state;
+
     return (
       <Fragment>
         <Search 
-          searchString={this.state.searchString} 
+          searchString={searchString} 
           handleInput={this.handleInput} 
-          handleSubmit={this.handleSubmit} />
+          handleSubmit={this.handleSubmit} /> 
         <div className='container row spacer'>          
-            {Object.keys(this.state).filter(item => item !== 'searchString').map(item => (
-              <QueryOptions 
-                key={item} 
-                options={this.state[item].options} 
-                queryId={item} 
-                definition={this.state[item].definition} 
-                handleQuery={this.handleQuery} 
-                selected={this.state[item].value} />
-            ))}        
-        </div>        
+          {Object.keys(this.state).filter(item => item !== 'searchString').map(item => (
+            <QueryOptions 
+              key={item} 
+              options={this.state[item].options} 
+              queryId={item} 
+              definition={this.state[item].definition} 
+              handleQuery={this.handleQuery} 
+              selected={this.state[item].value} />
+          ))}        
+        </div>
       </Fragment>      
     );
   }
