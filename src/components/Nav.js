@@ -51,7 +51,6 @@ class Nav extends Component {
     const { searchString, type, sort } = this.state; 
 
     history.push(`/?query=${searchString}&type=${type.queryValue}&sort=${sort.queryValue}&page=0`);
-    // this.setState((prevState) => ({...prevState, searchString: ''}));
   }
 
   handleQuery = (option, queryId) => {
@@ -67,6 +66,7 @@ class Nav extends Component {
 
   render() {
     const { searchString } = this.state;
+    const { location } = this.props;
 
     return (
       <Fragment>
@@ -74,16 +74,18 @@ class Nav extends Component {
           searchString={searchString} 
           handleInput={this.handleInput} 
           handleSubmit={this.handleSubmit} /> 
-        <div className='container row spacer'>          
-          {Object.keys(this.state).filter(item => item !== 'searchString').map(item => (
-            <QueryOptions 
-              key={item} 
-              options={this.state[item].options} 
-              queryId={item} 
-              definition={this.state[item].definition} 
-              handleQuery={this.handleQuery} 
-              selected={this.state[item].value} />
-          ))}        
+        <div className='container row spacer'> 
+          { location.pathname === "/about" 
+             ? null 
+             : Object.keys(this.state).filter(item => item !== 'searchString').map(item => (
+               <QueryOptions 
+                 key={item} 
+                 options={this.state[item].options} 
+                 queryId={item} 
+                 definition={this.state[item].definition} 
+                 handleQuery={this.handleQuery} 
+                 selected={this.state[item].value} />
+              )) }                          
         </div>
       </Fragment>      
     );

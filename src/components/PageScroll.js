@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import queryString from 'query-string';
 import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class PageScroll extends Component {
   togglePage = (e) => {
@@ -31,11 +32,18 @@ class PageScroll extends Component {
     const { search } = this.props.location;
     const terms = queryString.parse(search);
 
-    return (      
-      <div className='row pagination-spacing'>
-        <button className='pagination-button' id='prev' disabled={terms.page === '0'} onClick={this.togglePage}>Prev</button>
-        <button className='pagination-button' id='next' disabled={terms.page === '49'} onClick={this.togglePage}>Next</button>
-      </div>      
+    return (
+      <Fragment>
+        <div className='row pagination-spacing'>
+          <button className='pagination-button' id='prev' disabled={terms.page === '0'} onClick={this.togglePage}>Prev</button>
+          <button className='pagination-button' id='next' disabled={terms.page === '49'} onClick={this.togglePage}>Next</button>                    
+          <div style={{marginLeft: 'auto'}}>
+            <Link className='about-button' to='/about'>
+              About
+            </Link>
+          </div>                              
+        </div>         
+      </Fragment>                 
     );
   }
 }

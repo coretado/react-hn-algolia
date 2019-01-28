@@ -202,6 +202,12 @@ body {
 }
 
 /* pagination */
+.about-button {
+  text-decoration: none;
+  color: #222224;
+  font-size: 2rem;  
+}
+
 .pagination-spacing {
   margin: 1vw auto;
 }
@@ -211,13 +217,38 @@ body {
   border: none;
   
   text-decoration: underline;
-  font-size: 1.6rem;
+  font-size: 2rem;
   padding: 0.5rem;
   background-color: transparent;
   cursor: pointer;
-  margin-right: 1.5vw;
+  margin-right: 2vw;
 }
 
 .pagination-button:hover:enabled {
   font-weight: bold;
+}
+
+/* Typography */
+.about-heading {
+  text-align: center;
+  font-size: 3.5rem;
+  color: #2ED5EE;
+}
+
+.about-text-container {
+  max-width: 59rem;
+  text-align: justify;
+  margin: 0 auto;
+  font-size: 1.8rem;
+}
+
+.error-heading {
+  text-align: center;
+  font-size: 3.5rem;
+}
+
+.error-text {
+  color: #F12A3C;
+  font-size: 2.0rem;
+  text-align: center;
 }

@@ -25,7 +25,7 @@ const Nav = (props) => {
         </div>
       </form>
       <div style={{ marginLeft: '1vw' }}>
-        <span style={{ fontSize: '1.6rem' }}>by <a href='https://hn.algolia.com/api'>Angolia</a></span>
+        <span style={{ fontSize: '1.6rem' }}>by <a href='https://hn.algolia.com/api'>Algolia</a></span>
       </div>
     </div>
     </header>
