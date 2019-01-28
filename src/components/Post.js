@@ -7,7 +7,7 @@ const Post = (props) => {
     <div className='post-card'>
       <a href={url}>{story_title ? story_title : title}</a>
       <div className='row'>
-        <span><a href={`https://news.ycombinator.com/item?id=${objectID}`}>{points} points</a></span>
+        <span><a href={`https://news.ycombinator.com/item?id=${objectID}`}>{points ? points : 0} points</a></span>
         <span className='leave-a-space'>|</span>
         <span><a href={`https://news.ycombinator.com/user?id=${author}`}>{author}</a></span>
         <span className='leave-a-space'>|</span>

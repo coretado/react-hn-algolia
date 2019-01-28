@@ -9,12 +9,10 @@ class PageScroll extends Component {
     const { search } = this.props.location;
     const { history } = this.props;
     const terms = queryString.parse(search);
-    console.log(terms, test);
 
     switch(test) {
       case 'prev':
         const pageDown = parseInt(terms.page, 10) - 1;
-        console.log(pageDown);
         history.push(`/?query=${terms.query}&type=${terms.type}&sort=${terms.sort}&page=${pageDown}`);
         return null;
       case 'next': 

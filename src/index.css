@@ -28,8 +28,14 @@ body {
 /* App Accents */
 .app-logo {
   font-family: 'Source Code Pro', monospace;
-  font-size: 4rem;
+  font-size: 2.5rem;
   color: #2ED5EE;
+}
+
+.app-logo-symbol {
+  fill: #2ED5EE;
+  height: 2.5rem;
+  width: 2.5rem;
 }
 
 /* App Container and Layout */
@@ -37,6 +43,17 @@ body {
   position: relative;
   max-width: 128rem;
   min-width: 30rem;
+  margin: 0 auto;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  max-width: 128rem;
+  min-width: 30rem;
+  width: 100%;
   margin: 0 auto;
 }
 

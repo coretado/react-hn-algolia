@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { querySelector } from '../utility/querySelector';
 import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
 
 import Search from './Search';
 import QueryOptions from './QueryOptions';
@@ -31,10 +32,11 @@ class Nav extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { type, sort } = this.state; 
-    const { history } = this.props;
+    const { history, location } = this.props;
 
     if (prevState.type.value !== type.value || prevState.sort.value !== sort.value ) {
-      history.push(`/?query=&type=${type.queryValue}&sort=${sort.queryValue}&page=0`);          
+      const locationTerms = queryString.parse(location.search);
+      history.push(`/?query=${locationTerms.query}&type=${type.queryValue}&sort=${sort.queryValue}&page=0`);          
     }    
   }
 
@@ -44,11 +46,12 @@ class Nav extends Component {
   }
 
   handleSubmit = (e) => {
-    const { history } = this.props;
-    const { searchString, type, sort } = this.state;
     e.preventDefault();
-    this.setState((prevState) => ({...prevState, searchString: ''}));
+    const { history } = this.props;
+    const { searchString, type, sort } = this.state; 
+
     history.push(`/?query=${searchString}&type=${type.queryValue}&sort=${sort.queryValue}&page=0`);
+    // this.setState((prevState) => ({...prevState, searchString: ''}));
   }
 
   handleQuery = (option, queryId) => {
