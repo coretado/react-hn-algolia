@@ -15,6 +15,18 @@ html {
   font-size: 62.5%;
 }
 
+@media screen and (max-width: 750px) {
+  html {
+    font-size: 50%;
+  }  
+}
+
+@media screen and (max-width: 500px) {
+  html {
+    font-size: 37.5%;
+  } 
+}
+
 body {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 400;
@@ -175,6 +187,7 @@ body {
 .post-search-info {
   display: flex;
   justify-content: flex-end;
+  font-size: 1.6rem;
 }
 
 .post-card {

@@ -19,7 +19,7 @@ const Nav = (props) => {
             type="search"
             id="search"
             onChange={props.handleInput}
-            placeholder={`What is the average air speed velocity of a laden swallow`}
+            placeholder={`What's on your mind?`}
             className='search'
             value={props.searchString} />
         </div>
