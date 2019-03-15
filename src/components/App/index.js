@@ -1,27 +1,16 @@
-import React, { Component, Fragment } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from "react";
 
-import About from "../About";
 import Nav from "../Nav";
-import NotFound from "../NotFound";
-import SearchView from "../SearchView";
+import { PostList } from "../Post";
 
-class App extends Component {
-  render() {
-    return (
-      <Router>
-        <Fragment>
-          <Nav />
+const App = () => (
+  <>
+    <Nav />
 
-          <Switch>
-            <Route exact path="/" component={SearchView} />
-            <Route path="/about" component={About} />
-            <Route component={NotFound} />
-          </Switch>
-        </Fragment>
-      </Router>
-    );
-  }
-}
+    <div className="container">
+      <PostList />
+    </div>
+  </>
+);
 
 export default App;

@@ -1,33 +1,12 @@
-import React, { Component } from 'react';
+import React from "react";
+import styles from "./Loading.module.css";
 
-class Loading extends Component {
-  state = {
-    text: this.props.text
-  }
-
-  componentDidMount() {
-    const { text, speed } = this.props;
-    const stopper = `${text}...`;
-    this.interval = window.setInterval(() => {
-      this.state.text === stopper 
-        ? this.setState((prevState) => ({...prevState, text: text})) 
-        : this.setState((prevState) => ({...prevState, text: prevState.text + '.'}))
-    }, speed);
-  }
-
-  componentWillUnmount() {
-    window.clearInterval(this.interval);
-  }
-
-  render() {
-    return (
-      <div className='container'>
-        <span className='loading-text'>
-          {this.state.text}
-        </span>
-      </div>      
-    );
-  }
-}
+const Loading = () => (
+  <div className={styles.spinner}>
+    <div className={styles.bounce1} />
+    <div className={styles.bounce2} />
+    <div className={styles.bounce3} />
+  </div>
+);
 
 export default Loading;
