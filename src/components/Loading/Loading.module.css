@@ -1,3 +1,7 @@
+/* 
+  CSS code from GitHub user - https://github.com/tobiasahlin
+*/
+
 .spinner {
   margin: 0 auto;
   width: 70px;
@@ -7,7 +11,7 @@
 .spinner > div {
   width: 18px;
   height: 18px;
-  background-color: #212725;
+  background-color: #2b2b2b;
 
   border-radius: 100%;
   display: inline-block;

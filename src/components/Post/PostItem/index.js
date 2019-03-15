@@ -1,10 +1,10 @@
 import React from "react";
 
-const PostItem = () => {
+const PostItem = () => (
   <>
     <div>Look at me, I'm the Post Item Component!</div>
-  </>;
-};
+  </>
+);
 
 export default PostItem;
 

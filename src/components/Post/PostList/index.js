@@ -4,11 +4,9 @@ import PostItem from "../PostItem";
 
 const PostList = () => (
   <>
-    <div>
-      Look at me, im the Post List Component!
-      <hr />
-      <PostItem />
-    </div>
+    Look at me, im the Post List Component!
+    <hr />
+    <PostItem />
   </>
 );
 
