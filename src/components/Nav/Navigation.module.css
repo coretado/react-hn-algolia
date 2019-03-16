@@ -1,0 +1,59 @@
+.navigation {
+  min-height: 100px;
+  background-color: #2b2b2b;
+  color: #fff;
+  align-content: center;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+}
+
+.navFlex {
+  display: flex;
+  align-items: center;
+}
+
+.navFlex img {
+  margin-right: 10px;
+}
+
+.navFlex img:last-child {
+  margin-right: 0;
+}
+
+/* 254, 230, 132 */
+
+.navigationMain {
+  width: 54px;
+  height: 54px;
+  border-radius: 10px;
+  border: 1px solid #fff;
+}
+
+.navigationTOD {
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.navigationTOD svg {
+  width: 36px;
+  height: 36px;
+  fill: rgb(254, 230, 132);
+}
+
+.navigationIcon {
+  width: 36px;
+  height: 36px;
+  fill: #fff;
+  transition: fill 0.3s ease-out;
+}
+
+.navigationIcon:hover {
+  fill: #80d8ff;
+}
+
+.pushLeft {
+  margin-left: auto;
+}
