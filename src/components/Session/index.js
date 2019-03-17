@@ -13,7 +13,7 @@ const ThemeReducer = (state, action) => {
     case TOGGLE_MODE:
       return {
         ...state,
-        toggle: action.payload
+        day: !state.day
       };
     default:
       return state;
@@ -25,7 +25,7 @@ const ThemeReducer = (state, action) => {
 // context provider is only concerned with how
 // the application should look like
 const INITIAL_STATE = {
-  theme: "Day"
+  day: true
 };
 
 // Creating context to be exported
@@ -39,4 +39,6 @@ const ThemeContext = ({ children }) => {
   );
 };
 
-export { ThemeContext };
+const ThemeConsumer = Theme.Consumer;
+
+export { Theme, ThemeContext, ThemeConsumer };
