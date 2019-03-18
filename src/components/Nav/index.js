@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Theme } from "../Session";
 import ReactLogo from "../../icons/ReactLogo.svg";
 import styles from "./Navigation.module.css";
@@ -18,7 +18,7 @@ const Navigation = () => {
             className={styles.navigationMain}
             alt="The React.js framework logo. Looks like science."
           />
-          <span>React Angolia</span>
+          <span>React Algolia</span>
         </div>
 
         <div className={[styles.navFlex, styles.pushLeft].join(" ")}>

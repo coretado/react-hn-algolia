@@ -37,9 +37,8 @@ body {
 }
 
 a {
-  /* color: #4fc3f7; */
-  /* color: #b0bec5; */
-  color: #e1f5fe;
+  color: #81d4fa;
+  /* color: #e1f5fe; */
 }
 
 /*=============================
@@ -213,8 +212,8 @@ p {
 =============================*/
 hr {
   border-width: 0.5px;
-  /* border-color: #a7a7a7; */
-  border-color: #e1f5fe;
+  border-color: #a7a7a7;
+  /* border-color: #e1f5fe; */
 }
 
 /*=============================
@@ -260,7 +259,7 @@ ul {
   width: 24px;
   height: 24px;
   margin-right: 6px;
-  fill: #607d8b;
+  /* fill: #546e7a; */
 }
 
 /*=============================
