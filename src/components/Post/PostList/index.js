@@ -5,7 +5,7 @@ import axios from "axios";
 import Loading from "../../Loading";
 import PostItem from "../PostItem";
 
-const searchUrl = "http://hn.algolia.com/api/v1/search?query=";
+const searchUrl = "http://hn.algolia.com/api/v1/search_by_date?query=";
 const INITIAL_STATE = {
   error: false,
   loading: false,
@@ -50,8 +50,6 @@ const fetchDataApi = searchUrl => {
 
     try {
       const results = await axios.get(`${searchUrl}${query}&tags=story`);
-
-      console.log(results);
       dispatch({ type: FETCH_SUCCESS, payload: results.data.hits });
     } catch (error) {
       dispatch({ type: FETCH_FAIL });
