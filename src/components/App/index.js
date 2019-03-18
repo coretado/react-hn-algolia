@@ -5,8 +5,9 @@ import Nav from "../Nav";
 import { PostList } from "../Post";
 
 const App = () => {
-  const { state } = useContext(Theme);
-  const { day } = state;
+  const {
+    state: { day }
+  } = useContext(Theme);
 
   return (
     <div className={day ? "app-container-day" : "app-container-night"}>

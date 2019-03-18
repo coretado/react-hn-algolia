@@ -1,14 +1,23 @@
 import React from "react";
+import { tellTime } from "../../../utility/tellTime";
 
-const PostItem = () => (
-  <>
-    <div>Look at me, I'm the Post Item Component!</div>
-  </>
+const PostItem = ({
+  author,
+  created_at_i,
+  num_comments,
+  objectID,
+  points,
+  title,
+  story_title,
+  url
+}) => (
+  <li>
+    <a href={url}>{story_title ? story_title : title}</a>
+    <hr />
+  </li>
 );
 
 export default PostItem;
-
-// import { tellTime } from '../utility/tellTime';
 
 // const Post = (props) => {
 //   const { author, created_at_i, num_comments, objectID, points, title, story_title, url } = props.post;

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useReducer, useState } from "react";
 import { Theme } from "../../Session";
 import axios from "axios";
 
+import Loading from "../../Loading";
 import PostItem from "../PostItem";
 
 const searchUrl = "http://hn.algolia.com/api/v1/search?query=";
@@ -33,7 +34,7 @@ const fetchDataReducer = (state, { type, payload = null }) => {
       return {
         ...state,
         loading: false,
-        hits: payload
+        hits: [...payload]
       };
     default:
       return state;
@@ -41,16 +42,17 @@ const fetchDataReducer = (state, { type, payload = null }) => {
 };
 
 const fetchDataApi = searchUrl => {
-  const [query, setQuery] = useState(searchUrl);
+  const [query, setQuery] = useState("");
   const [state, dispatch] = useReducer(fetchDataReducer, INITIAL_STATE);
 
   const fetchData = async () => {
     dispatch(FETCH_LOAD);
 
     try {
-      const results = await axios.get(`${searchUrl}${query}`);
+      const results = await axios.get(`${searchUrl}${query}&tags=story`);
 
-      dispatch({ type: FETCH_SUCCESS, payload: results });
+      console.log(results);
+      dispatch({ type: FETCH_SUCCESS, payload: results.data.hits });
     } catch (error) {
       dispatch({ type: FETCH_FAIL });
     }
@@ -69,22 +71,45 @@ const fetchDataApi = searchUrl => {
 
 const PostList = () => {
   const [text, setText] = useState("");
-  const { state } = useContext(Theme);
-  const { day } = state;
+  const {
+    state: { day }
+  } = useContext(Theme);
+  const { hits, loading, error, changeQuery } = fetchDataApi(searchUrl);
 
   const onChangeSearch = event => {
     const { value } = event.target;
     setText(value);
   };
 
+  const onSubmitSearch = event => {
+    event.preventDefault();
+
+    changeQuery(text);
+  };
+
+  const noSubmit = text === "";
+
   return (
     <>
-      <form>
+      <form onSubmit={onSubmitSearch}>
         <input type="text" value={text} onChange={onChangeSearch} />
-        <button type="submit" isDisabled={text} />
+        <button type="submit" disabled={noSubmit} />
       </form>
       <hr />
-      <PostItem theme={day} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <ul>
+          {hits.map(hit => (
+            <PostItem key={hit.objectID} theme={day} {...hit} />
+          ))}
+        </ul>
+      )}
+      {error && (
+        <div>
+          <p>Something went wrong.</p>
+        </div>
+      )}
     </>
   );
 };
