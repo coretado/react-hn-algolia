@@ -27,6 +27,16 @@ body {
 /*=============================
   Grid
 =============================*/
+.app-container-day {
+  background-color: #fffafa;
+  height: 100vh;
+}
+
+.app-container-night {
+  background-color: #c0c0c0;
+  height: 100vh;
+}
+
 .container {
   width: 80%;
   max-width: 960px;

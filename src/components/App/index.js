@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Theme } from "../Session";
 
 import Nav from "../Nav";
 import { PostList } from "../Post";
 
-const App = () => (
-  <>
-    <Nav />
+const App = () => {
+  const { state } = useContext(Theme);
+  const { day } = state;
 
-    <div className="container">
-      <PostList />
+  return (
+    <div className={day ? "app-container-day" : "app-container-night"}>
+      <Nav />
+
+      <div className="container">
+        <PostList />
+      </div>
     </div>
-  </>
-);
+  );
+};
 
 export default App;
