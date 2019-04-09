@@ -52,7 +52,8 @@ a {
 }
 
 .app-container-night {
-  background-color: #37474f;
+  /* background-color: #37474f; */
+  background-color: #191919;
   height: 100vh;
   overflow: auto;
   width: 100%;
@@ -259,7 +260,7 @@ ul {
   width: 24px;
   height: 24px;
   margin-right: 6px;
-  /* fill: #546e7a; */
+  fill: #546e7a;
 }
 
 /*=============================

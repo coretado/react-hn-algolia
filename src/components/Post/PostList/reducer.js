@@ -1,4 +1,13 @@
-import React, { useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
+import {
+  FETCH_LOAD,
+  FETCH_SUCCESS,
+  FETCH_FAIL,
+  FETCH_TEXT_CHANGE,
+  FETCH_TEXT_RESET,
+  FETCH_PAGE_CHANGE,
+  FETCH_PAGE_RESET
+} from "./reducerTerms";
 import axios from "axios";
 
 const INITIAL_STATE = {
@@ -9,13 +18,7 @@ const INITIAL_STATE = {
   page: 0
 };
 
-const FETCH_LOAD = "FETCH_LOAD";
-const FETCH_SUCCESS = "FETCH_SUCCESS";
-const FETCH_FAIL = "FETCH_FAIL";
-const FETCH_TEXT_CHANGE = "FETCH_TEXT_CHANGE";
-const FETCH_TEXT_RESET = "FETCH_TEXT_RESET";
-const FETCH_PAGE_CHANGE = "FETCH_PAGE_CHANGE";
-const FETCH_PAGE_RESET = "FETCH_PAGE_RESET";
+const DEFAULT_HITS = 50;
 
 const fetchDataReducer = (state, { type, payload = null }) => {
   switch (type) {
@@ -71,7 +74,9 @@ const fetchDataApi = searchUrl => {
 
     try {
       const results = await axios.get(
-        `${searchUrl}${state.query}&tags=story&page=${state.page}`
+        `${searchUrl}${state.query}&tags=story&page=${
+          state.page
+        }&hitsPerPage=${DEFAULT_HITS}`
       );
       console.log(results);
       dispatch({ type: FETCH_SUCCESS, payload: results.data.hits });
@@ -80,15 +85,19 @@ const fetchDataApi = searchUrl => {
     }
   };
 
-  // const changeQuery = queryParam => {
-  //   setQuery(query + 1);
-  // };
+  const changeQuery = queryParam => {
+    dispatch({ type: FETCH_TEXT_CHANGE, payload: queryParam });
+  };
+
+  const onPaginate = () => {
+    console.log("I hit paginate");
+  };
 
   useEffect(() => {
     fetchData();
   }, [state.query, state.page]);
 
-  return { ...state };
+  return { ...state, changeQuery, onPaginate };
 };
 
 export default fetchDataApi;

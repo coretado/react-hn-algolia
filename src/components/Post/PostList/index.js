@@ -14,13 +14,9 @@ const PostList = () => {
   const {
     state: { day }
   } = useContext(Theme);
-  const { query, hits, loading, error, changeQuery } = fetchDataApi(searchUrl);
-
-  const onChangePage = () => {
-    if (query < 50) {
-      changeQuery();
-    }
-  };
+  const { query, hits, loading, error, changeQuery, onPaginate } = fetchDataApi(
+    searchUrl
+  );
 
   const onChangeSearch = event => {
     const { value } = event.target;
@@ -53,7 +49,7 @@ const PostList = () => {
       )}
 
       {query < 50 ? (
-        <button onClick={onChangePage}>Load more</button>
+        <button onClick={onPaginate}>Load more</button>
       ) : (
         <span>Nothing left!</span>
       )}
