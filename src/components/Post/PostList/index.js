@@ -10,7 +10,7 @@ import PostItem from "../PostItem";
 const searchUrl = "http://hn.algolia.com/api/v1/search?query=";
 
 const PostList = () => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState("react");
   const {
     state: { day }
   } = useContext(Theme);
@@ -38,27 +38,17 @@ const PostList = () => {
         <button type="submit" disabled={noSubmit} />
       </form>
 
-      {loading ? (
+      {loading || !hits[query] ? (
         <Loading />
       ) : (
         <ul>
-          {hits.map(hit => (
+          {hits[query].hits.map(hit => (
             <PostItem key={hit.objectID} theme={day} {...hit} />
           ))}
         </ul>
       )}
 
-      {query < 50 ? (
-        <button onClick={onPaginate}>Load more</button>
-      ) : (
-        <span>Nothing left!</span>
-      )}
-
-      {error && (
-        <div>
-          <p>Something went wrong.</p>
-        </div>
-      )}
+      {!loading && <button onClick={onPaginate}>Load more</button>}
     </>
   );
 };

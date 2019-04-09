@@ -12,9 +12,9 @@ import axios from "axios";
 
 const INITIAL_STATE = {
   error: false,
-  hits: [],
-  loading: false,
-  query: "",
+  hits: {},
+  loading: true,
+  query: "react",
   page: 0
 };
 
@@ -35,6 +35,7 @@ const fetchDataReducer = (state, { type, payload = null }) => {
         error: true
       };
     case FETCH_PAGE_CHANGE:
+      console.log("im in here");
       return {
         ...state,
         page: state.page + 1
@@ -45,10 +46,18 @@ const fetchDataReducer = (state, { type, payload = null }) => {
         page: 0
       };
     case FETCH_SUCCESS:
+      const oldHits = state.hits[state.query]
+        ? state.hits[state.query].hits
+        : [];
+      const updatedHits = [...oldHits, ...payload];
+
       return {
         ...state,
         loading: false,
-        hits: [...state.hits, ...payload]
+        hits: {
+          ...state.hits,
+          [state.query]: { hits: updatedHits }
+        }
       };
     case FETCH_TEXT_CHANGE:
       return {
@@ -70,8 +79,6 @@ const fetchDataApi = searchUrl => {
   const [state, dispatch] = useReducer(fetchDataReducer, INITIAL_STATE);
 
   const fetchData = async () => {
-    dispatch(FETCH_LOAD);
-
     try {
       const results = await axios.get(
         `${searchUrl}${state.query}&tags=story&page=${
@@ -86,11 +93,13 @@ const fetchDataApi = searchUrl => {
   };
 
   const changeQuery = queryParam => {
+    console.log("I got called");
+    dispatch(FETCH_LOAD);
     dispatch({ type: FETCH_TEXT_CHANGE, payload: queryParam });
   };
 
   const onPaginate = () => {
-    console.log("I hit paginate");
+    dispatch({ type: FETCH_PAGE_CHANGE });
   };
 
   useEffect(() => {
