@@ -12,13 +12,12 @@ import axios from "axios";
 
 const INITIAL_STATE = {
   error: false,
-  hits: {},
+  results: {},
   loading: true,
-  query: "react",
-  page: 0
+  query: "react"
 };
 
-const DEFAULT_HITS = 50;
+const DEFAULT_HITS = 20;
 
 const fetchDataReducer = (state, { type, payload = null }) => {
   switch (type) {
@@ -34,29 +33,18 @@ const fetchDataReducer = (state, { type, payload = null }) => {
         loading: false,
         error: true
       };
-    case FETCH_PAGE_CHANGE:
-      console.log("im in here");
-      return {
-        ...state,
-        page: state.page + 1
-      };
-    case FETCH_PAGE_RESET:
-      return {
-        ...state,
-        page: 0
-      };
     case FETCH_SUCCESS:
-      const oldHits = state.hits[state.query]
-        ? state.hits[state.query].hits
+      const oldHits = state.results[state.query]
+        ? state.results[state.query].hits
         : [];
-      const updatedHits = [...oldHits, ...payload];
+      const updatedHits = [...oldHits, ...payload.hits];
 
       return {
         ...state,
         loading: false,
-        hits: {
-          ...state.hits,
-          [state.query]: { hits: updatedHits }
+        results: {
+          ...state.results,
+          [state.query]: { hits: updatedHits, page: payload.page }
         }
       };
     case FETCH_TEXT_CHANGE:
@@ -78,35 +66,53 @@ const fetchDataApi = searchUrl => {
   // page and query
   const [state, dispatch] = useReducer(fetchDataReducer, INITIAL_STATE);
 
-  const fetchData = async () => {
+  const fetchData = async (page = 0) => {
+    const preExisting = state.results[state.query];
+    console.log(preExisting);
+
     try {
       const results = await axios.get(
-        `${searchUrl}${state.query}&tags=story&page=${
-          state.page
-        }&hitsPerPage=${DEFAULT_HITS}`
+        `${searchUrl}${
+          state.query
+        }&tags=story&page=${page}&hitsPerPage=${DEFAULT_HITS}`
       );
       console.log(results);
-      dispatch({ type: FETCH_SUCCESS, payload: results.data.hits });
+      dispatch({
+        type: FETCH_SUCCESS,
+        payload: { hits: results.data.hits, page }
+      });
     } catch (error) {
       dispatch({ type: FETCH_FAIL });
     }
   };
 
-  const changeQuery = queryParam => {
-    console.log("I got called");
-    dispatch(FETCH_LOAD);
-    dispatch({ type: FETCH_TEXT_CHANGE, payload: queryParam });
+  const paginate = () => {
+    const { results, query } = state;
+    let updatedPage = results[query].page + 1;
+
+    fetchData(updatedPage);
   };
 
-  const onPaginate = () => {
-    dispatch({ type: FETCH_PAGE_CHANGE });
+  const changeQuery = queryParam => {
+    dispatch({ type: FETCH_TEXT_CHANGE, payload: queryParam });
   };
 
   useEffect(() => {
     fetchData();
-  }, [state.query, state.page]);
+  }, []);
 
-  return { ...state, changeQuery, onPaginate };
+  return { ...state, changeQuery, paginate };
 };
 
 export default fetchDataApi;
+
+// case FETCH_PAGE_CHANGE:
+//       return {
+//         ...state,
+//         page: state.page + 1
+//       };
+//     case FETCH_PAGE_RESET:
+//       return {
+//         ...state,
+//         page: 0
+//       };

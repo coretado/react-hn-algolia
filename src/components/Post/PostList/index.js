@@ -14,9 +14,14 @@ const PostList = () => {
   const {
     state: { day }
   } = useContext(Theme);
-  const { query, hits, loading, error, changeQuery, onPaginate } = fetchDataApi(
-    searchUrl
-  );
+  const {
+    query,
+    results,
+    loading,
+    error,
+    changeQuery,
+    paginate
+  } = fetchDataApi(searchUrl);
 
   const onChangeSearch = event => {
     const { value } = event.target;
@@ -38,17 +43,17 @@ const PostList = () => {
         <button type="submit" disabled={noSubmit} />
       </form>
 
-      {loading || !hits[query] ? (
+      {loading || !results[query] ? (
         <Loading />
       ) : (
         <ul>
-          {hits[query].hits.map(hit => (
+          {results[query].hits.map(hit => (
             <PostItem key={hit.objectID} theme={day} {...hit} />
           ))}
         </ul>
       )}
 
-      {!loading && <button onClick={onPaginate}>Load more</button>}
+      {!loading && <button onClick={paginate}>Load more</button>}
     </>
   );
 };
