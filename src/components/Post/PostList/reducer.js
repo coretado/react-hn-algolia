@@ -4,9 +4,7 @@ import {
   FETCH_SUCCESS,
   FETCH_FAIL,
   FETCH_TEXT_CHANGE,
-  FETCH_TEXT_RESET,
-  FETCH_PAGE_CHANGE,
-  FETCH_PAGE_RESET
+  FETCH_TEXT_RESET
 } from "./reducerTerms";
 import axios from "axios";
 
@@ -67,19 +65,28 @@ const fetchDataApi = searchUrl => {
   const [state, dispatch] = useReducer(fetchDataReducer, INITIAL_STATE);
 
   const fetchData = async (page = 0) => {
-    const preExisting = state.results[state.query];
-    console.log(preExisting);
+    const preExisting =
+      state.results[state.query] && state.results[state.query].page + 1;
+
+    // const preExisting = state.results[state.query];
+
+    // if (preExisting && page !== 0) {
+    //   return;
+    // }
 
     try {
       const results = await axios.get(
-        `${searchUrl}${
-          state.query
-        }&tags=story&page=${page}&hitsPerPage=${DEFAULT_HITS}`
+        `${searchUrl}${state.query}&tags=story&page=${
+          preExisting ? preExisting : page
+        }&hitsPerPage=${DEFAULT_HITS}`
       );
       console.log(results);
       dispatch({
         type: FETCH_SUCCESS,
-        payload: { hits: results.data.hits, page }
+        payload: {
+          hits: results.data.hits,
+          page: preExisting ? preExisting : page
+        }
       });
     } catch (error) {
       dispatch({ type: FETCH_FAIL });
@@ -99,20 +106,9 @@ const fetchDataApi = searchUrl => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [state.query]);
 
   return { ...state, changeQuery, paginate };
 };
 
 export default fetchDataApi;
-
-// case FETCH_PAGE_CHANGE:
-//       return {
-//         ...state,
-//         page: state.page + 1
-//       };
-//     case FETCH_PAGE_RESET:
-//       return {
-//         ...state,
-//         page: 0
-//       };
