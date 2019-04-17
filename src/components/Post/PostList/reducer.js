@@ -74,7 +74,6 @@ const fetchDataApi = searchUrl => {
           preExisting ? preExisting : page
         }&hitsPerPage=${DEFAULT_HITS}`
       );
-      console.log(results);
       dispatch({
         type: FETCH_SUCCESS,
         payload: {
