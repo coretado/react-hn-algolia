@@ -283,3 +283,46 @@ ul {
   justify-content: center;
   align-items: center;
 }
+
+/*=============================
+  Search Utilities
+=============================*/
+.searchField {
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchField input {
+  font-size: 22.5px;
+  border: none;
+  background-color: #d9dee0;
+  outline: none;
+}
+
+.searchField button {
+  font-size: 15px;
+  padding: 5px;
+  outline: none;
+  border: 0.5px solid #546e7a;
+  background-color: #81d4fa;
+  border-radius: 0 3px 3px 0;
+  cursor: pointer;
+}
+
+.searchButton {
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.searchButton button {
+  padding: 10px 15px;
+  border: 1px solid #546e7a;
+  background-color: #81d4fa;
+  font-size: 16px;
+  border-radius: 3px;
+  cursor: pointer;
+  outline: none;
+}

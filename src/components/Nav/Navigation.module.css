@@ -23,11 +23,30 @@
 
 /* 254, 230, 132 */
 
-.navigationMain {
-  width: 54px;
-  height: 54px;
+.mainWrapper {
   border-radius: 10px;
   border: 1px solid #fff;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.navigationMain {
+  width: 45px;
+  height: 45px;
+  animation: mainSpin infinite 20s linear;
+}
+
+@keyframes mainSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .navigationTOD {

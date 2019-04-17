@@ -13,11 +13,13 @@ const Navigation = () => {
     <nav className={styles.navigation}>
       <div className={[styles.navFlex, "container"].join(" ")}>
         <div className={styles.navFlex}>
-          <img
-            src={ReactLogo}
-            className={styles.navigationMain}
-            alt="The React.js framework logo. Looks like science."
-          />
+          <div className={styles.mainWrapper}>
+            <img
+              src={ReactLogo}
+              className={styles.navigationMain}
+              alt="The React.js framework logo. Looks like science."
+            />
+          </div>
           <span>React Algolia</span>
         </div>
 

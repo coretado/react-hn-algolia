@@ -38,9 +38,11 @@ const PostList = () => {
 
   return (
     <>
-      <form onSubmit={onSubmitSearch}>
+      <form className="searchField" onSubmit={onSubmitSearch}>
         <input type="text" value={text} onChange={onChangeSearch} />
-        <button type="submit" disabled={noSubmit} />
+        <button type="submit" disabled={noSubmit}>
+          Search
+        </button>
       </form>
 
       {loading || !results[query] ? (
@@ -53,7 +55,11 @@ const PostList = () => {
         </ul>
       )}
 
-      {!loading && <button onClick={paginate}>Load more</button>}
+      {!loading && (
+        <div className="searchButton">
+          <button onClick={paginate}>Load more</button>
+        </div>
+      )}
     </>
   );
 };
