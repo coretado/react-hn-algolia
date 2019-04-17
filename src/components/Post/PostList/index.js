@@ -7,7 +7,7 @@ import { Theme } from "../../Session";
 import Loading from "../../Loading";
 import PostItem from "../PostItem";
 
-const searchUrl = "http://hn.algolia.com/api/v1/search?query=";
+const searchUrl = "https://hn.algolia.com/api/v1/search?query=";
 
 const PostList = () => {
   const [text, setText] = useState("react");

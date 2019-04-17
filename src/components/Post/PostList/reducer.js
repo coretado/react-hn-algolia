@@ -68,12 +68,6 @@ const fetchDataApi = searchUrl => {
     const preExisting =
       state.results[state.query] && state.results[state.query].page + 1;
 
-    // const preExisting = state.results[state.query];
-
-    // if (preExisting && page !== 0) {
-    //   return;
-    // }
-
     try {
       const results = await axios.get(
         `${searchUrl}${state.query}&tags=story&page=${
