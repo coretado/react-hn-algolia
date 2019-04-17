@@ -1,7 +1,7 @@
 {
   "main.css": "/react-hn-algolia/static/css/main.67ac0825.chunk.css",
-  "main.js": "/react-hn-algolia/static/js/main.7474f20e.chunk.js",
-  "main.js.map": "/react-hn-algolia/static/js/main.7474f20e.chunk.js.map",
+  "main.js": "/react-hn-algolia/static/js/main.0c2ecba5.chunk.js",
+  "main.js.map": "/react-hn-algolia/static/js/main.0c2ecba5.chunk.js.map",
   "static/js/1.b4211e13.chunk.js": "/react-hn-algolia/static/js/1.b4211e13.chunk.js",
   "static/js/1.b4211e13.chunk.js.map": "/react-hn-algolia/static/js/1.b4211e13.chunk.js.map",
   "runtime~main.js": "/react-hn-algolia/static/js/runtime~main.165e9da4.js",
@@ -9,6 +9,6 @@
   "static/media/ReactLogo.svg": "/react-hn-algolia/static/media/ReactLogo.26ef1cbc.svg",
   "static/css/main.67ac0825.chunk.css.map": "/react-hn-algolia/static/css/main.67ac0825.chunk.css.map",
   "index.html": "/react-hn-algolia/index.html",
-  "precache-manifest.129c6bc8aac66ea6ca6acf29002a7253.js": "/react-hn-algolia/precache-manifest.129c6bc8aac66ea6ca6acf29002a7253.js",
+  "precache-manifest.9754e6538725f3b7fee17f6e9c5fcb1f.js": "/react-hn-algolia/precache-manifest.9754e6538725f3b7fee17f6e9c5fcb1f.js",
   "service-worker.js": "/react-hn-algolia/service-worker.js"
 }
