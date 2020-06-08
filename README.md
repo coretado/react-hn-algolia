@@ -1,6 +1,6 @@
 ## General Info
 
-This project uses React's Context API to manage a global theme setting, and React Hooks for favoring functional components over traditional state components. The project interfaces with [Algolia's Hacker News API v1](https://hn.algolia.com/api). A running demo can be found [here](https://snvtahoe.github.io/react-hn-algolia).
+This project uses React's Context API to manage a global theme setting, and React Hooks for favoring functional components over traditional state components. The project interfaces with [Algolia's Hacker News API v1](https://hn.algolia.com/api).
 
 ## Started with
 
